@@ -1,11 +1,11 @@
 body {
-	background-color: greenyellow;
+	background-color: white;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .container {
 	margin: auto;
-	background-color: honeydew;
+	background-color: grey;
 	width: 80%;
 	padding: 1em;
 }
