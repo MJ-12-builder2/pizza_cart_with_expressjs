@@ -17,19 +17,20 @@ app.use(express.static('public'));
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-//let counter = 0;
+	let counter = 0;
 
-app.get('/', function(req, res) {
-	res.render('index', {
-		counter
-	});
-});
+ app.get('/', function(req, res) {
+	 res.render('index', {
+		counter,
+ 	});
+ });
 
 app.post('/count', function(req, res) {
 	counter++;
 	res.redirect('/')
-});
 
+ console.log(req.body.size);
+});
 app.post('/count', function(req, res) {
 	if(req.session.counter){
 		req.session.counter = 0;
@@ -56,10 +57,31 @@ app.listen(PORT, function() {
 });
 
 
-	console.log(req.body.size)
+// Create a new login screen	
 
-	const order = {
-		orderId : 32,
-		status : "Payment due",
-		amount : 213.97
-	  }
+app.get('/login', function(req, res) {
+	res.render('login', {
+	});
+})
+
+app.post('/login', function(req, res) {
+	
+	if(req.body.username){
+		req.session.username=req.body.username;
+		res.redirect('/');
+	} else { 
+		res.redirect('/login');
+	}
+})
+
+function getCart(req) {
+      
+	const username = req.session.username
+	if (username) {
+		// note a user might nor have a cart yet - handle that inside the Factory Function.
+		return factoryFunction.getCart(username);
+	} else {
+		// not logged in we can't do much
+		// res.redirect('/login');
+	}
+}
